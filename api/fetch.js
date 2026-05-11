@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
-const DIST = join(ROOT, 'dist');
+const DIST = join(ROOT, 'docs');
 const PUBLIC = join(ROOT, 'public');
 
 // Validate environment variables
@@ -216,7 +216,7 @@ async function build() {
   const laws = parseMarkdown(markdown);
   console.log(`Parsed ${laws.length} laws, ${laws.reduce((s, l) => s + l.paragraphs.length, 0)} paragraphs.`);
 
-  console.log('Generating dist/...');
+  console.log('Generating docs/...');
   if (!existsSync(DIST)) {
     await mkdir(DIST, { recursive: true });
   }
@@ -226,7 +226,7 @@ async function build() {
   await copyFile(join(PUBLIC, 'styles.css'), join(DIST, 'styles.css'));
   await copyFile(join(PUBLIC, 'search.js'), join(DIST, 'search.js'));
 
-  console.log('Build complete. Output in dist/.');
+  console.log('Build complete. Output in docs/.');
 }
 
 build().catch((err) => {
