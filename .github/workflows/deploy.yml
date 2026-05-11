@@ -30,8 +30,8 @@ jobs:
       - name: Check for changes
         id: diff
         run: |
-          git add dist/index.html dist/styles.css dist/search.js
-          if git diff --quiet --cached dist/index.html dist/styles.css dist/search.js; then
+          git add docs/index.html docs/styles.css docs/search.js
+          if git diff --quiet --cached docs/index.html docs/styles.css docs/search.js; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             echo "changed=true" >> "$GITHUB_OUTPUT"
