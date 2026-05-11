@@ -1,9 +1,8 @@
 {
+  "name": "legal-code-site",
+  "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "build": "node api/fetch.js"
-  },
-  "dependencies": {
-    "marked": "^15.0.0"
-  },
-  "devDependencies": {}
+  }
 }

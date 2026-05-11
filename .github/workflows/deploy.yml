@@ -3,7 +3,7 @@ name: Build Legal Code
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 */3 * * *"
+    - cron: '43 */3 * * *'
 
 permissions:
   contents: write
@@ -19,23 +19,32 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: '22'
 
-      - name: Build HTML
+      - name: Run build
         env:
           HACKMD_API_KEY: ${{ secrets.HACKMD_API_KEY }}
           HACKMD_NOTE_ID: ${{ secrets.HACKMD_NOTE_ID }}
         run: npm run build
 
-      - name: Commit only if files changed
+      - name: Check for changes
+        id: diff
         run: |
-          if git diff --quiet -- dist/index.html dist/styles.css; then
-            echo "No changes."
-            exit 0
+          git add dist/index.html dist/styles.css dist/search.js
+          if git diff --quiet --cached dist/index.html dist/styles.css dist/search.js; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
 
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add dist/index.html dist/styles.css
-          git commit -m "Update"
+      - name: Commit and push if changed
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "Update legal code"
           git push
+
+      - name: No changes
+        if: steps.diff.outputs.changed == 'false'
+        run: echo "No changes."
