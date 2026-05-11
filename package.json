@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "build": "node api/fetch.js"
+  },
+  "dependencies": {
+    "marked": "^15.0.0"
+  },
+  "devDependencies": {}
+}
