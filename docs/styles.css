@@ -123,6 +123,29 @@ body {
   color: var(--text-sidebar-muted);
 }
 
+#search-input {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  border: 1px solid var(--search-border);
+  border-radius: 4px;
+  background: #1a1a1a;
+  color: var(--text-light);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+#search-input:focus {
+  border-color: var(--accent);
+  background: #222;
+  box-shadow: 0 0 0 3px rgba(91, 155, 213, 0.15);
+}
+
+#search-input::placeholder {
+  color: var(--text-sidebar-muted);
+}
+
 .nav-list {
   list-style: none;
   padding: 0.5rem 0;

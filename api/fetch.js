@@ -130,8 +130,10 @@ function renderHtml(laws) {
         .map(
             (law) =>
                 `<li class="nav-law" id="nav-${escapeHtml(law.id)}">
-      <a href="#${escapeHtml(law.id)}" class="nav-law-link">${escapeHtml(law.abbreviation)}</a>
-      <span class="nav-law-title">${escapeHtml(law.title)}</span>
+      <a href="#${escapeHtml(law.id)}" class="nav-law-link">
+        <span class="nav-law-abbr">${escapeHtml(law.abbreviation)}</span>
+        <span class="nav-law-title">${escapeHtml(law.title)}</span>
+      </a>
     </li>`
         )
         .join('');
@@ -165,7 +167,17 @@ function renderHtml(laws) {
   <div class="layout">
     <nav class="sidebar" id="sidebar">
       <div class="sidebar-header">
-        <span class="sidebar-label">Gesetze</span>
+        <h2 class="sidebar-title">Gesetzessammlung</h2>
+        <p class="sidebar-subtitle">Königreich Aranea</p>
+      </div>
+      <div class="sidebar-search">
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Suchen..."
+          aria-label="Suche"
+        >
       </div>
       <ul class="nav-list" id="nav-list">
         ${navItems}
@@ -186,7 +198,7 @@ function renderHtml(laws) {
       <div class="search-bar">
         <input
           type="search"
-          id="search-input"
+          id="search-input-hidden"
           class="search-input"
           placeholder="Gesetze und Paragraphen durchsuchen..."
           aria-label="Suche"
